@@ -5,54 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dynamic To-Do List</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 30px; }
-    h2 { color: #333; }
-    #todo-container { max-width: 400px; margin: auto; }
-    input, button { padding: 10px; margin: 5px; }
-    ul { list-style-type: none; padding: 0; }
-    li {
-      background: #f4f4f4; 
-      margin: 5px 0; 
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .todo-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .input-section {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    #taskInput {
+      flex: 1;
       padding: 10px;
-      display: flex; 
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 15px;
+      margin-left: 10px;
+      border: none;
+      background: #007bff;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #f9f9f9;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      display: flex;
       justify-content: space-between;
       align-items: center;
-      border-radius: 5px;
     }
-    button.delete {
-      background: red; 
-      color: white; 
-      border: none; 
-      padding: 5px 10px; 
-      cursor: pointer;
+    .delete-btn {
+      background: #dc3545;
+      padding: 5px 10px;
+      border-radius: 6px;
+    }
+    .delete-btn:hover {
+      background: #b02a37;
     }
   </style>
 </head>
 <body>
-  <div id="todo-container">
+  <div class="todo-container">
     <h2>My To-Do List</h2>
-    <input type="text" id="taskInput" placeholder="Enter new task">
-    <button onclick="addTask()">Add Task</button>
+    <div class="input-section">
+      <input type="text" id="taskInput" placeholder="Enter a new task">
+      <button onclick="addTask()">Add</button>
+    </div>
     <ul id="taskList"></ul>
   </div>
 
   <script>
     function addTask() {
-      
-      let input = document.getElementById("taskInput");
-      let taskText = input.value.trim();
-      
+      const input = document.getElementById("taskInput");
+      const taskText = input.value.trim();
+
       if (taskText === "") {
         alert("Please enter a task!");
         return;
       }
 
-      let li = document.createElement("li");
+      const li = document.createElement("li");
       li.textContent = taskText;
 
-      let deleteBtn = document.createElement("button");
+      const deleteBtn = document.createElement("button");
       deleteBtn.textContent = "Delete";
-      deleteBtn.className = "delete";
+      deleteBtn.className = "delete-btn";
       deleteBtn.onclick = function () {
         li.remove();
       };
